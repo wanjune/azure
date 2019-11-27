@@ -1,0 +1,21 @@
+azure:
+  keyvault:
+    uri: ${BASE_URI}
+    client-id: ${CLIENT_ID}
+    client-key: ${CLIENT_SECRET}
+jasypt:
+  encryptor:
+    password: dscc
+spring:
+  datasource:
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    hikari:
+      pool-name: KeyVault_Tester
+logging:
+  level:
+    root: WARN
+    org:
+      wanjune:
+        azure:
+          keyvault:
+            mapper: TRACE
