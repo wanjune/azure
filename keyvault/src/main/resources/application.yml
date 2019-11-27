@@ -5,7 +5,7 @@ azure:
     client-key: ${CLIENT_SECRET}
 jasypt:
   encryptor:
-    password: dscc
+    password: tester
 spring:
   datasource:
     driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
