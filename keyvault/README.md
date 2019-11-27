@@ -1,4 +1,4 @@
-## Devlopment with Key-Vault 
+## Development with Key-Vault 
 #### Run or Debug, 设置环境变量
 **①编辑运行参数IDEA**
 >`RUN` -> `Editors Configurations...`
