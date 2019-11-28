@@ -1,6 +1,5 @@
 package org.wanjune.azure.keyvault;
 
-import org.jasypt.util.text.BasicTextEncryptor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -10,19 +9,34 @@ import org.wanjune.azure.keyvault.mapper.DemoMapper;
 
 import java.util.List;
 
+/**
+ * @author wanjune
+ */
 @SpringBootApplication
 public class KeyvaultApplication implements CommandLineRunner {
 
     private final DemoMapper demoMapper;
 
+    /**
+     * Key Vault
+     */
     @Value("${azure.keyvault.uri}")
     private String KV_URI;
-
     @Value("${azure.keyvault.client-id}")
     private String KV_ClientId;
-
     @Value("${azure.keyvault.client-key}")
     private String KV_ClientKey;
+
+    /**
+     * Database
+     */
+    @Value("${spring.datasource.url}")
+    private String dbUrl;
+    @Value("${spring.datasource.username}")
+    private String dbUsername;
+    @Value("${spring.datasource.password}")
+    private String dbPassword;
+
 
     public KeyvaultApplication(DemoMapper demoMapper) {
         this.demoMapper = demoMapper;
@@ -36,21 +50,27 @@ public class KeyvaultApplication implements CommandLineRunner {
     public void run(String... args) {
 
         // Check [Key Vault]
-        System.out.println(String.format("\nConnection String stored in Azure Key Vault[uri]:\n%s", KV_URI));
-        System.out.println(String.format("\nConnection String stored in Azure Key Vault[client-id]:\n%s", KV_ClientId));
-        System.out.println(String.format("\nConnection String stored in Azure Key Vault[client-key]:\n%s", KV_ClientKey));
+        System.out.println(String.format("\nAzure Key Vault[uri]:\n%s", KV_URI));
+        System.out.println(String.format("\nAzure Key Vault[client-id]:\n%s", KV_ClientId));
+        System.out.println(String.format("\nAzure Key Vault[client-key]:\n%s", KV_ClientKey));
+        System.out.println("\n");
+
+        // Check [Database] for [Key Vault]
+        System.out.println(String.format("\nConnection String DB[url]:\n%s", dbUrl));
+        System.out.println(String.format("\nConnection String DB[username]:\n%s", dbUsername));
+        System.out.println(String.format("\nConnection String DB[password]:\n%s", dbPassword));
         System.out.println("\n");
 
         // Check DataBase Link and Query Result
         List<DemoDomain> demoDomainList = this.demoMapper.selectAll();
         DemoDomain demoDomainItem = null;
         // Print
-        if(demoDomainList.size() > 0) {
+        if (demoDomainList.size() > 0) {
             System.out.println(String.format("\n No : Sex \t UserID \t Points "));
         }
         for (int i = 0; i < demoDomainList.size(); i++) {
             demoDomainItem = demoDomainList.get(i);
-            System.out.println(String.format("\n %s : %s \t %s \t %s ", i+1, demoDomainItem.getSex(), demoDomainItem.getUserId(), demoDomainItem.getPoints()));
+            System.out.println(String.format("\n %s : %s \t %s \t %s ", i + 1, demoDomainItem.getSex(), demoDomainItem.getUserId(), demoDomainItem.getPoints()));
         }
     }
 }
