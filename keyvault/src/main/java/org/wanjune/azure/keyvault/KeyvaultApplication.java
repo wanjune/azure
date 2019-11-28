@@ -1,5 +1,9 @@
 package org.wanjune.azure.keyvault;
 
+import com.microsoft.azure.PagedList;
+import com.microsoft.azure.keyvault.KeyVaultClient;
+import com.microsoft.azure.keyvault.models.SecretItem;
+import com.microsoft.azure.keyvault.spring.AzureKeyVaultCredential;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -53,6 +57,14 @@ public class KeyvaultApplication implements CommandLineRunner {
         System.out.println(String.format("\nAzure Key Vault[uri]:\n%s", KV_URI));
         System.out.println(String.format("\nAzure Key Vault[client-id]:\n%s", KV_ClientId));
         System.out.println(String.format("\nAzure Key Vault[client-key]:\n%s", KV_ClientKey));
+
+        // All Key by the setting in URI of [Key Vault]
+        KeyVaultClient kvClient = new KeyVaultClient(new AzureKeyVaultCredential(KV_ClientId, KV_ClientKey, 60L));
+        PagedList<SecretItem> secrets = kvClient.listSecrets(KV_URI);
+        System.out.println("\nAzure Key Vault Settings ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ :");
+        for (SecretItem secret : secrets) {
+            System.out.println(secret.id().replaceFirst(KV_URI + "secrets/", "").replaceAll("-", "."));
+        }
 
         // Check [Database] for [Key Vault]
         System.out.println(String.format("\nConnection String DB[url]:\n%s", dbUrl));
