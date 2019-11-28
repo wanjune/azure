@@ -1,11 +1,11 @@
 azure:
   keyvault:
-    uri: ${BASE_URI}
-    client-id: ${CLIENT_ID}
-    client-key: ${CLIENT_SECRET}
+    uri: ${AZURE_KEYVAULT_URI}
+    client-id: ${AZURE_KEYVAULT_CLIENT_ID}
+    client-key: ${AZURE_KEYVAULT_CLIENT_KEY}
 jasypt:
   encryptor:
-    password: ${ENCRYPT_SALT} # 加密/解密SALT(盐)
+    password: ${JASYPT_ENCRYPTOR_SALT} # 加密/解密SALT(盐)
 spring:
   datasource:
     driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver

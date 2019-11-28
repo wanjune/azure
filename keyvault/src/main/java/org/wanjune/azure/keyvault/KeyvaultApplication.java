@@ -53,7 +53,6 @@ public class KeyvaultApplication implements CommandLineRunner {
         System.out.println(String.format("\nAzure Key Vault[uri]:\n%s", KV_URI));
         System.out.println(String.format("\nAzure Key Vault[client-id]:\n%s", KV_ClientId));
         System.out.println(String.format("\nAzure Key Vault[client-key]:\n%s", KV_ClientKey));
-        System.out.println("\n");
 
         // Check [Database] for [Key Vault]
         System.out.println(String.format("\nConnection String DB[url]:\n%s", dbUrl));
