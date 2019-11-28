@@ -5,12 +5,12 @@ azure:
     client-key: ${CLIENT_SECRET}
 jasypt:
   encryptor:
-    password: tester
+    password: ${ENCRYPT_SALT} # 加密/解密SALT(盐)
 spring:
   datasource:
     driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
     hikari:
-      pool-name: KeyVault_Tester
+      pool-name: AZURE_KEY_VAULT_DEMO # 任意值
 logging:
   level:
     root: WARN

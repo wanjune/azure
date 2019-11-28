@@ -1,5 +1,6 @@
 package org.wanjune.azure.keyvault;
 
+import org.jasypt.util.text.BasicTextEncryptor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -33,6 +34,7 @@ public class KeyvaultApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
+
         // Check [Key Vault]
         System.out.println(String.format("\nConnection String stored in Azure Key Vault[uri]:\n%s", KV_URI));
         System.out.println(String.format("\nConnection String stored in Azure Key Vault[client-id]:\n%s", KV_ClientId));
